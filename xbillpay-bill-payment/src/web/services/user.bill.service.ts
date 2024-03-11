@@ -32,6 +32,7 @@ export class BillPaymentService {
     bill.amount=billPaymentDto.amount
     bill.type=billPaymentDto.type
     bill.agentId=agentId
+    bill.agent_comision=commissionAmount
     await this.billRepository.createBill(bill);
 
 

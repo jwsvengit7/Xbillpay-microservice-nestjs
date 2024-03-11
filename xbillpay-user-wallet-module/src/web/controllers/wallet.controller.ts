@@ -3,6 +3,7 @@ import { WalletRequestDto } from "../../domain/dto/request/wallet.creation";
 import { WalletService } from "../services/wallet.service";
 import { AddFundRequestDto } from "../../domain/dto/request/wallet.add-fund";
 import { AuthGuard } from "../../middlewares/auth.guards";
+import { DeductDto } from "src/domain/dto/request/deduct.accountdto";
 
 @Controller("api/v3/wallet")
 export class WalletController{
@@ -35,8 +36,8 @@ export class WalletController{
         }
         @Post("deduct-wallet")
         @UseGuards(AuthGuard)
-        checkBalance(@Param('id') id: number){
-            return this.userService.checkVirtualAccount(id);
+        deduct_balance(@Body() deductDto:DeductDto){
+            return this.userService.deduct(deductDto);
         }
 
     }
