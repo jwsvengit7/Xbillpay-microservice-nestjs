@@ -6,5 +6,9 @@ export class TransferEntity{
     id:number;
     @Column()
     amount:number;
+    @Column()
+    reference:string;
+    @Column()
+    createdDate:Date;
 
 }

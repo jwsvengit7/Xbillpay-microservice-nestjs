@@ -29,11 +29,12 @@ export class WalletService {
     }
   }
 
-  async   deduct(deductDto: DeductDto) {
+  async  deduct(deductDto: DeductDto) {
     const wallet =await  this.walletAccountRepository.findWalletByEmail(deductDto.email);
     if(wallet){
         wallet.amount-=deductDto.amount;
-    return await this.walletAccountRepository.save(wallet);
+     await this.walletAccountRepository.save(wallet);
+     return "Account have been deducted";
     }else{
         throw new BadRequestException("Wallet Not found")
     }

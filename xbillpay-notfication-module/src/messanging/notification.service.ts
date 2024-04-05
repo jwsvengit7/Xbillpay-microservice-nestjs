@@ -1,15 +1,17 @@
 
 import { Injectable } from '@nestjs/common';
 import * as amqp from 'amqplib';
+import { EventDrivenService } from 'src/services/event.driven';
 
 @Injectable()
 export class NotificationConsumerService {
   private readonly url: string;
   private readonly queueName: string;
 
-  constructor() {
+  constructor(private readonly eventDriven: EventDrivenService) {
     this.url = 'amqp://guest:guest@localhost'; // Corrected URL
     this.queueName = 'otp_message'; 
+    ; 
   }
 
   async consumeMessages() {
@@ -22,6 +24,7 @@ export class NotificationConsumerService {
       channel.consume(this.queueName, (message) => {
         if (message !== null) {
           console.log(`Received message: ${message.content.toString()}`);
+          this.eventDriven.recievedOTP(message);
       
           channel.ack(message);
         }

@@ -5,10 +5,10 @@ import { XBILLUserOTP } from "../domain/entities/user.otp";
 export const ormconfig:TypeOrmModule = {
     type:"mysql",
     host:"localhost",
-    port:3306,
+    port:3307,
     username:"root",
     password:"",
-    database:"app",
+    database:"xbill_auth",
     entities: [XBILLUserAgent,XBILLUserOTP],
 
     synchronize:true

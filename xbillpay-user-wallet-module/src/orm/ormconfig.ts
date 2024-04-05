@@ -4,10 +4,10 @@ import { WalletAccount } from "../domain/entities/user.wallet.account";
 export const ormconfig:TypeOrmModule = {
     type:"mysql",
     host:"localhost",
-    port:3306,
+    port:3307,
     username:"root",
     password:"",
-    database:"wallet",
+    database:"xbill_wallet",
     entities: [WalletAccount],
 
     synchronize:true

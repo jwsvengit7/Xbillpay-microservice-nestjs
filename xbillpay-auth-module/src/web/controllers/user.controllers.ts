@@ -6,7 +6,7 @@ import { AuthService } from "../services/auth.service";
 import { VerifyOTPDto } from "../../domain/dto/user.verifyOtp";
 import { ResendOTPDto } from "../../domain/dto/user.resend";
 import { AuthGuard } from "../../guard/auth.guard";
-import { ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ApiResponseBuilder, ApiResponses } from "../../domain/dto/response/code.api.response";
 @ApiTags('users')
 @Controller("api/v1")
@@ -21,7 +21,8 @@ export class UserController{
         }
     
         @Post("register")
-        @ApiResponse({ status: 200, type: [RegisterDto] })
+        @ApiOperation({ summary: 'Create User', description: 'Returns a user response' })
+@ApiResponse({ status: 200, type: [RegisterDto] ,description: 'Create an agent  users  successfully' })
         @UsePipes(new ValidationPipe())
         createUser(@Body() registerDto: RegisterDto): Promise<ApiResponses<String>>{
     
@@ -29,7 +30,8 @@ export class UserController{
         }
 
         @Post("login")
-        @ApiResponse({ status: 200, type: [LoginDto] })
+        @ApiOperation({ summary: 'Login User', description: 'Returns a user authentication code' })
+        @ApiResponse({ status: 200, type: [LoginDto] ,description: 'Log in with your details' })
 
         @UsePipes(new ValidationPipe())
         loginUser(@Body() loginDto: LoginDto){
@@ -38,7 +40,8 @@ export class UserController{
         }
 
         @Post("verify-otp")
-        @ApiResponse({ status: 200, type: [VerifyOTPDto] })
+        @ApiOperation({ summary: 'Verify OTP', description: 'Returns a user details' })
+        @ApiResponse({ status: 200, type: [VerifyOTPDto] ,description: 'Verify OTP' })
 
         @UsePipes(new ValidationPipe())
         verifyOTP(@Body() verifyOtp: VerifyOTPDto) {
@@ -47,7 +50,8 @@ export class UserController{
 
         
         @Post("resend-otp")
-        @ApiResponse({ status: 200, type: [ResendOTPDto] })
+        @ApiOperation({ summary: 'RESEND OTP', description: 'Returns a user otp' })
+        @ApiResponse({ status: 200, type: [ResendOTPDto] ,description: 'RESEND OTP' })
 
         @UsePipes(new ValidationPipe())
         resndOTP(@Body() verifyOtp: ResendOTPDto) {
@@ -57,6 +61,9 @@ export class UserController{
 
         @Get('agent/:id') 
         @UseGuards(AuthGuard)
+        @ApiOperation({ summary: 'et Agent Details', description: 'Returns a agent details' })
+        @ApiResponse({ status: 200, type: [Number] ,description: 'Get Agent Details' })
+
              getAgents(@Param('id') id: number) {
             return this.authService.getAgent(id);
         }

@@ -5,12 +5,12 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const options = new DocumentBuilder()
-    .setTitle('Your API')
-    .setDescription('API description')
+    .setTitle('XBILL AUTH SERVICE')
+    .setDescription('This API covered for authentication about the agent and rabbitmq producer')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api/swagger/auth-module', app, document);
   await app.listen(3000);
 }
 bootstrap();

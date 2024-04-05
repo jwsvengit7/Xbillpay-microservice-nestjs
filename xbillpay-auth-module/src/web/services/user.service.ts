@@ -135,6 +135,7 @@ export class UserService {
         if (existingUser) {
             existingUser.otp=null;
             await this.userRepository.saveUser(existingUser)
+            await this.otpRepository.deleteOTP(existingOtp.id);
         }
         
         await this.sendVerificationOTP(existingUser);

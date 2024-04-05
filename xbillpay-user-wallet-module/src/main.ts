@@ -1,9 +1,16 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-// import { WalletConsumerService } from './messanging/consume/wallet.rabbibmq';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const options = new DocumentBuilder()
+  .setTitle('XBILL WALLET  SERVICE')
+  .setDescription('This API covered for authentication about the agent and rabbitmq producer')
+  .setVersion('1.0')
+  .build();
+const document = SwaggerModule.createDocument(app, options);
+SwaggerModule.setup('api/swagger/wallet-module', app, document);
 
   await app.listen(3003);
 }

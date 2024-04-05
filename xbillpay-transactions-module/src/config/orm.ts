@@ -1,6 +1,5 @@
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { XBILLPaymentEnity } from "../domain/entities/XBILL.payment.entity";
-
+import { TransferEntity } from "src/domain/entities/transaction.entity";
 
 export const ormconfig:TypeOrmModule = {
     type:"mysql",
@@ -8,8 +7,8 @@ export const ormconfig:TypeOrmModule = {
     port:3307,
     username:"root",
     password:"",
-    database:"xbill_payment",
-    entities: [XBILLPaymentEnity],
+    database:"xbill_transfer",
+    entities: [TransferEntity],
 
     synchronize:true
 
