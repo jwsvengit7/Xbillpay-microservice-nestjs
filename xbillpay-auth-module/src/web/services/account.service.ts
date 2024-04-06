@@ -10,6 +10,7 @@ import * as dotenv from 'dotenv';
 import { FLUTTER_KEY } from "../../utils/app.utils";
 import { Gender } from "../../domain/enums/enum.gender";
 dotenv.config();
+import { Request,Response } from 'express';
 
 
 
@@ -41,19 +42,21 @@ export class PaystackService {
         customer.billing_state="Lagos"
         customer.callback_url=`https://localhost:3000/callback-url/${user.id}`
         customer.debit_currency="NGN"
+        customer.cardUniqId=user.id;
+
+        this.rabbitMQService.sendMessageOTP(customer,"wallet");
      
 
-        const paysatckBaseUrl="http://localhost:3003/api/v3";
-        axios.post(`${paysatckBaseUrl}/virtual-cards/${user.id}`, customer, {
-            headers: {
-
-              'Content-Type': 'application/json'
-            }
-          })
-          .then(response => {
+        // const BaseUrl="http://localhost:3003/api/v3/wallet";
+        // axios.post(`${BaseUrl}/virtual-cards/${user.id}`, customer, {
+        //     headers: {
+        //       'Content-Type': 'application/json'
+        //     }
+        //   })
+        //   .then(response => {
            
-            console.log(response.data);
-            return response.data.data;
+        //     console.log(response.data);
+            // return response.data.data;
             // axios.post(`${paysatckBaseUrl}/dedicated_account`, JSON.stringify({customer:id,preferred_bank:"wema-bank"}), {
             //     headers: {
             //       Authorization: `Bearer ${PAYSTACK_KEY}`,
@@ -71,11 +74,11 @@ export class PaystackService {
 
 
             // return response.data.message
-          })
-          .catch(error => {
-            console.error(error);
-            return error
-          });
+          // })
+          // .catch(error => {
+          //   console.error(error);
+          //   return error
+          // });
           
 
     }

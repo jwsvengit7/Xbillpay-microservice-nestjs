@@ -5,6 +5,10 @@ export class WalletRequestDto {
   @IsString()
   @IsNotEmpty()
   currency: string;
+  @IsNumber()
+  @IsNotEmpty()
+  cardUniqId: number;
+  
 
   @IsNumber()
   @IsNotEmpty()

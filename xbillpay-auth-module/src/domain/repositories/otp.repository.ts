@@ -21,8 +21,8 @@ export class OTPRepository {
   async findOneByOTPUser(user: XBILLUserAgent): Promise<XBILLUserOTP | undefined> {
     return this.OTPRepository.findOne({ where: { user: user } });
   }
-  async deleteOTP(id:number){
-    await this.OTPRepository.delete({ id: id });
+  async deleteOTP(user:XBILLUserAgent){
+    await this.OTPRepository.delete({ user: user });
 
   } 
 

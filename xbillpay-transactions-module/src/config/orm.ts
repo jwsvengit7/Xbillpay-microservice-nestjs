@@ -1,6 +1,5 @@
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { TransferEntity } from "src/domain/entities/transaction.entity";
-
 export const ormconfig:TypeOrmModule = {
     type:"mysql",
     host:"localhost",

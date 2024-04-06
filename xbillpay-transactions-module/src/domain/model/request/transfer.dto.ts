@@ -5,15 +5,15 @@ export class TransferFundRequestDto{
         description:"amount",
         example:"amount"
       })
-    amount:string;
+    amount:number;
     @ApiProperty({
         description:"agentId",
         example:"agentId"
       })
     agentId:number;
     @ApiProperty({
-        description:"agentSend",
-        example:"agentSend"
+        description:"email",
+        example:"string"
       })
-    agentSend:number;
+    email:string;
 }

@@ -4,7 +4,7 @@ import { TransferFundRequestDto } from "../../domain/model/request/transfer.dto"
 import { AuthGuard } from "../../guard/auth.guards";
 import { ApiOperation, ApiResponse } from "@nestjs/swagger";
 
-
+import {Request} from 'express'
 @Controller("api/v3/transfer")
 export class TransferController{
     private transferService:TransferService;
@@ -19,8 +19,8 @@ export class TransferController{
         @ApiOperation({ summary: 'Transafer Funds', description: 'Returns a Transfer Result' })
         @ApiResponse({ status: 200, type: [TransferFundRequestDto] ,description: 'Transafer Funds' })
         @UseGuards(AuthGuard)
-        addFunds(@Body() transferDto: TransferFundRequestDto){
-            return this.transferService.transfer(transferDto);
+        addFunds(@Body() transferDto: TransferFundRequestDto,req:Request){
+            return this.transferService.transfer(transferDto,req);
         }
 
      

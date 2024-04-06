@@ -3,7 +3,7 @@ import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "ty
 
 
 
-@Entity({name:"users"})
+@Entity({name:"payment"})
 export class XBILLPaymentEnity{
     @PrimaryGeneratedColumn()
   id: number;

@@ -1,5 +1,4 @@
 import { Body, Controller, Get, Param, Post, UseGuards, UsePipes, ValidationPipe } from "@nestjs/common";
-import { WalletRequestDto } from "../../domain/dto/request/wallet.creation";
 import { WalletService } from "../services/wallet.service";
 import { AddFundRequestDto } from "../../domain/dto/request/wallet.add-fund";
 import { AuthGuard } from "../../middlewares/auth.guards";
@@ -16,14 +15,6 @@ export class WalletController{
 
         }
     
-        @Post("virtual-cards/:id")
-        @ApiOperation({ summary: 'createVirtualAccount', description: 'Returns a Response' })
-        @ApiResponse({ status: 200, type: [WalletRequestDto] ,description: 'Create VirtualAccount' })
-        @UsePipes(new ValidationPipe())
-        createUser(@Body() walletDto: WalletRequestDto,@Param('id') id: number){
-            return this.userService.createVirtualAccount(walletDto,id);
-        }
-
 
         @Post("add-fund/:id")
         @UsePipes(new ValidationPipe())
@@ -40,6 +31,13 @@ export class WalletController{
         @ApiResponse({ status: 200, type: [Number] ,description: 'Check Virtual Account' })
         checkBalance(@Param('id') id: number){
             return this.userService.checkVirtualAccount(id);
+        }
+        @Get("check-card-details/:id")
+        @UseGuards(AuthGuard)
+        @ApiOperation({ summary: 'checkVirtualAccount', description: 'Returns a Card details' })
+        @ApiResponse({ status: 200, type: [Number] ,description: 'Get Card Account' })
+        checkCard(@Param('id') id: number){
+            return this.userService.checkCardDetaiks(id);
         }
         @Post("deduct-wallet")
         @UseGuards(AuthGuard)

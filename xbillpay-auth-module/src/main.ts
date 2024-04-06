@@ -7,6 +7,9 @@ async function bootstrap() {
   const options = new DocumentBuilder()
     .setTitle('XBILL AUTH SERVICE')
     .setDescription('This API covered for authentication about the agent and rabbitmq producer')
+    .addBearerAuth({
+      type:"http",scheme:"Bearer",bearerFormat:"Token"
+    },"access-token")
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, options);

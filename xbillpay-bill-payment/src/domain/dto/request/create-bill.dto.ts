@@ -12,6 +12,7 @@ export class CreateBillDto {
     @IsNotEmpty()
     @IsEnum(BillType)
     type: BillType;
+    
     @ApiProperty({
       description:"amount",
       example:"amount"

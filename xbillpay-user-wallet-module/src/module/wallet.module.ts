@@ -6,12 +6,13 @@ import { WalletService } from '../web/services/wallet.service';
 import { WalletRepository } from '../domain/repository/wallet.repository';
 import { WalletAuthMiddleware } from '../middlewares/wallet.middlewares';
 import { JwtService } from '@nestjs/jwt';
+import { NotificationConsumerService } from '../messanging/consume/wallet.rabbibmq';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([WalletAccount])],
   controllers: [WalletController],
-  providers: [WalletService,WalletRepository,JwtService],
+  providers: [WalletService,WalletRepository,JwtService,NotificationConsumerService],
 })
 export class WalletModule implements NestModule {
     configure(consumer: MiddlewareConsumer) {

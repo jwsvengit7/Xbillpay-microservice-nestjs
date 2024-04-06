@@ -1,15 +1,18 @@
 
 import { Injectable } from '@nestjs/common';
 import * as amqp from 'amqplib';
+import { WalletService } from 'src/web/services/wallet.service';
+
 
 @Injectable()
-export class WalletConsumerService {
+export class NotificationConsumerService {
   private readonly url: string;
   private readonly queueName: string;
 
-  constructor() {
+  constructor(private readonly eventDriven: WalletService) {
     this.url = 'amqp://guest:guest@localhost'; // Corrected URL
-    this.queueName = 'wallet_creation'; 
+    this.queueName = 'wallet'; 
+    ; 
   }
 
   async consumeMessages() {
@@ -19,9 +22,10 @@ export class WalletConsumerService {
       await channel.assertQueue(this.queueName);
       console.log(`Waiting for messages in ${this.queueName}.`);
 
-      channel.consume(this.queueName, (message) => {
+      channel.consume(this.queueName, async(message)  => {
         if (message !== null) {
           console.log(`Received message: ${message.content.toString()}`);
+         await this.eventDriven.createVirtualAccount(message);
       
           channel.ack(message);
         }

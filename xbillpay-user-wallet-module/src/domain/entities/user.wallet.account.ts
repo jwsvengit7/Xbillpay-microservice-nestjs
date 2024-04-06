@@ -64,11 +64,12 @@ export class WalletAccount {
     expire: string;
     @Column()
 
-    cardNo: number;
+    cardNo: string;
 
     @Column()
 
     cardUniqId: number;
+    @Column()
 
     accountNumber:number;
     @Column()

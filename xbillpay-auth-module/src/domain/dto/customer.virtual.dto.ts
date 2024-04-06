@@ -9,6 +9,9 @@ export class WalletRequestDto {
   @IsString()
   @IsNotEmpty()
   currency: string;
+  @IsNumber()
+  @IsNotEmpty()
+  cardUniqId: number;
 
   @ApiProperty({
     description:"Currencty",

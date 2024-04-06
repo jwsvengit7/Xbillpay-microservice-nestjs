@@ -113,11 +113,11 @@ export class UserService {
         user.status=UserStatus.ACTIVE;
         user.otp=null;
         await this.userRepository.saveUser(user);
-        await this.otpRepository.deleteOTP(XBILLUserOTP.id);
-      const result =  await this.paystackService.createVirtualcustomer(user)
+        await this.otpRepository.deleteOTP(user);
+      await this.paystackService.createVirtualcustomer(user)
         const userApiResponse = new ApiResponseBuilder<any>()
         .setMessage("User and OTP retrieved successfully")
-        .setData(result)
+        .setData("result")
         .build();
         return userApiResponse;
         
@@ -131,11 +131,11 @@ export class UserService {
             throw new ConflictException('User Not found');
         }
         
-        const existingOtp = await this.otpRepository.findOneByOTPUser(existingUser);
-        if (existingUser) {
+   
+        if (existingUser.otp!=null) {
             existingUser.otp=null;
             await this.userRepository.saveUser(existingUser)
-            await this.otpRepository.deleteOTP(existingOtp.id);
+            await this.otpRepository.deleteOTP(existingUser);
         }
         
         await this.sendVerificationOTP(existingUser);

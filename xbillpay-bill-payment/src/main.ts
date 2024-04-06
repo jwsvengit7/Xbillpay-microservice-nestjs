@@ -7,6 +7,9 @@ async function bootstrap() {
   .setTitle('XBILL BILL PAYMENT SERVICE')
   .setDescription('This API covered for authentication about the agent and rabbitmq producer')
   .setVersion('1.0')
+  .addBearerAuth({
+    type:"http",scheme:"Bearer",bearerFormat:"Token"
+  },"access-token")
   .build();
 const document = SwaggerModule.createDocument(app, options);
 SwaggerModule.setup('api/swagger/bill-module', app, document);

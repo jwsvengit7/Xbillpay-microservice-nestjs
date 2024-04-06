@@ -13,18 +13,24 @@ export class WalletRepository {
     private walletRepository: Repository<WalletAccount>,
   ) {}
 
-  async saveWallet(newWallet: WalletRequestDto,id:number): Promise<WalletAccount> {
+  async saveWallet(newWallet: WalletRequestDto): Promise<WalletAccount> {
+    const date = new Date();
+    const year = date.getFullYear()+4;
+const month = (date.getMonth() + 1).toString().padStart(2, '0'); 
+const day = date.getDate().toString().padStart(2, '0'); 
+
+const expire = `${year}-${month}-${day}`;
+    console.log(expire)
     const walletAccount = this.walletRepository.create({
         ...newWallet,
         card_type: "verve", 
         cardpin: 1234, 
         cc:123, 
-        expire:  `${new Date().getMonth()/new Date().getFullYear()+4}`,
-        cardNo: Utils.generateCreditCardNumber(), 
-        cardUniqId: id, 
+        expire:  expire,
+        cardNo: Utils.generateCreditCardNumber().toString(), 
         accountNumber: 123456789, 
-        bank: "Access Bank", 
-        bankCode:"019",
+        bank: "Wema Bank", 
+        bankCode:"022",
       });
     return this.walletRepository.save(walletAccount);
   }

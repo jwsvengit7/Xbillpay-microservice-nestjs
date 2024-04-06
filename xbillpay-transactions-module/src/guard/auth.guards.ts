@@ -14,7 +14,7 @@ import { APPID } from '../enums/app.enums';
 import { TransferRepository } from '../domain/repository/transfer.respository';
 import { IS_PUBLIC_KEY } from '../utils/utils';
 dotenv.config();
-const secret=process.env.JWT_SECRET as string;
+const secret="404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970ARN304N39FR3NRF44"
   @Injectable()
   export class AuthGuard implements CanActivate {
     constructor(private jwtService: JwtService, private reflector: Reflector,private transferRepository: TransferRepository) {} 

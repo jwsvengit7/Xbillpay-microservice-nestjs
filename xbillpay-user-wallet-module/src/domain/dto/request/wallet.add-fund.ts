@@ -13,16 +13,8 @@ export class AddFundRequestDto {
         example:"email"
       })
     @IsEmail()
-
-
-
     email:string;
 
-    @ApiProperty({
-        description:"walletId",
-        example:"walletId"
-      })
-    @IsNotEmpty()
-    walletId:number;
+ 
 
 }

@@ -15,7 +15,7 @@ import { XBILLUserOTP } from '../../domain/entities/user.otp';
 import { PaystackService } from '../services/account.service';
 
 dotenv.config();
-const secret = process.env.JWT_SECRET as string;
+const secret="404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970ARN304N39FR3NRF44";
 
 @Module({
   imports: [
